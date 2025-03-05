@@ -3,6 +3,8 @@ package com.gerry.quizapp.controller;
 import com.gerry.quizapp.model.Question;
 import com.gerry.quizapp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,20 +17,20 @@ public class QuestionController {
     QuestionService questionService;
 
     @GetMapping("allQuestions")
-    public List<Question> getAllQuestions(){
+    public ResponseEntity <List<Question>> getAllQuestions(){
 
         return questionService.getAllQuestions();
     }
 
     @GetMapping("category/{category}")
-    public List<Question> getQuestionCategory (@PathVariable String category){
+    public ResponseEntity<List<Question>> getQuestionCategory (@PathVariable String category){
 
         return questionService.getQuestionByCategory(category);
 
     }
 
     @PostMapping("add")
-    public String addQuestion(@RequestBody Question question){
+    public ResponseEntity<String>  addQuestion(@RequestBody Question question){
 
         return questionService.addQuestion(question);
 
